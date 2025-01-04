@@ -52,7 +52,7 @@ class BookingOneWay(Base):
         # Esperar y seleccionar una fecha
         date_picker = wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='control_options ng-star-inserted']")))
         if date_picker.is_displayed():
-            self.click((By.XPATH, "//div[contains(@aria-label,'25-1-2025')]"))
+            self.click((By.XPATH, "//div[contains(@aria-label,'18-1-2025')]"))
         
         # Esperar y manejar el número de pasajeros
         passenger = wait.until(EC.visibility_of_element_located((By.ID, "paxControlSearchId")))

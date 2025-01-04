@@ -17,8 +17,11 @@ class SelectflyPage(Base):
         self.click(self.filter_Locator)
         buttonsprice = self.driver.find_elements(*self.price_Locator)
         buttonsprice[0].click()
-        buttonsfee = self.driver.find_elements(*self.fee_Locator)
-        buttonsfee[0].click()  
+        wait = WebDriverWait(self.driver, 10)  
+      
+        button_fee = wait.until(EC.element_to_be_clickable(self.fee_Locator))
+
+        button_fee.click()
         time.sleep(5)
         if(self.driver.title.__contains__("Seleccionar vuelo")):
              self.click(self.confirm_Locator)
