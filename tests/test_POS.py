@@ -27,7 +27,7 @@ def setup_and_teardown():
 
 
 @pytest.mark.usefixtures("setup_and_teardown")
-class TestLanguages:
+class TestPOS:
     def test_POS(self, setup_and_teardown):
         pospage, Pos_Ob = setup_and_teardown
         

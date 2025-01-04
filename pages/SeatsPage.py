@@ -15,7 +15,7 @@ class SeatsPage(Base):
         )
         
         seat_button1 = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, "//span[contains(text(), '26A')]/ancestor::button"))
+            EC.visibility_of_element_located((By.XPATH, "//span[contains(text(), '24A')]/ancestor::button"))
         )
         self.driver.execute_script("arguments[0].click();", seat_button1)
 
@@ -23,7 +23,7 @@ class SeatsPage(Base):
         EC.invisibility_of_element((By.CSS_SELECTOR, ".page-loader ng-star-inserted"))
         ) 
         seat_button2 = WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located((By.XPATH, "//span[contains(text(), '26B')]/ancestor::button"))
+            EC.visibility_of_element_located((By.XPATH, "//span[contains(text(), '24B')]/ancestor::button"))
         )
         self.driver.execute_script("arguments[0].click();", seat_button2)
         
@@ -31,7 +31,7 @@ class SeatsPage(Base):
         EC.invisibility_of_element((By.CSS_SELECTOR, ".page-loader ng-star-inserted"))
         ) 
         seat_button = WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located((By.XPATH, "//span[contains(text(), '26C')]/ancestor::button"))
+            EC.visibility_of_element_located((By.XPATH, "//span[contains(text(), '24C')]/ancestor::button"))
         )
         self.driver.execute_script("arguments[0].click();", seat_button)
         
