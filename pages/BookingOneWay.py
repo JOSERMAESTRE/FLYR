@@ -31,9 +31,9 @@ class BookingOneWay(Base):
         self.click(self.POS_Locator)
         posPopUp = wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@class='points-of-sale points-of-sale--popup points-of-sale--opened']")))
         if posPopUp.is_displayed():
-            buttons = self.driver.find_elements(By.XPATH, "//button[@class='points-of-sale_list_item_button']")
-            buttons[5].click()
-            self.click((By.XPATH, "//button[@class='button points-of-sale_footer_action_button']"))
+           button = self.driver.find_element(By.XPATH, "//button[@class='points-of-sale_list_item_button']//span[contains(text(),'Colombia')]")
+           button.click()
+           self.click((By.XPATH, "//button[@class='button points-of-sale_footer_action_button']"))
             
         if data[0] == "Ida":
             self.click(self.type_radio_locator)
