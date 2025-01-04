@@ -1,0 +1,179 @@
+{
+	"info": {
+		"_postman_id": "ebb5fec7-e0b2-4fbc-81ae-d7d776f26e96",
+		"name": "FLYR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38910927"
+	},
+	"item": [
+		{
+			"name": "CreateVaucher",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{QC-Token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json;charset=UTF-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"create-voucher\": {\r\n       \"channel\": \"AVCOM\",\r\n       \"number-of-cards\": \"1\",\r\n       \"reference-number\": \"CZ011\",\r\n       \"group-name\": \"AV Refund/ Payment feedback\",\r\n       \"amount\": \"100000\",\r\n       \"currency\": \"COP\",\r\n       \"carrier\": \"AV\",\r\n       \"agent\": \"132\",\r\n       \"office-id\": \"BOGAVL3\",\r\n       \"first-name\": \"Gregory\",\r\n       \"last-name\": \"Isakov\",\r\n       \"email\": \"santiago.apellido@gmail.es\",\r\n       \"mobile\": \"3107898787\"\r\n   }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{EndPointCreateVaucher}}",
+					"host": [
+						"{{URL}}{{EndPointCreateVaucher}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReloadVaucher",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{QC-Token}}",
+						"type": "text"
+					},
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"reload\": {\r\n       \"channel\": \"AVCOM\",\r\n       \"reference-number\": \"test15\",\r\n       \"cards\": [\r\n           {\r\n               \"voucher\": \"{{VoucherNumber}}\",\r\n               \"currency\": \"EUR\",\r\n               \"amount\": \"500\",\r\n               \"carrier\": \"AV\",\r\n               \"agent\": \"Avianca\",\r\n               \"office-id\": \"AirlineOffice1\",\r\n               \"beneficiaries\": [\r\n                   {\r\n                       \"first-name\": \"Test\",\r\n                       \"last-name\": \"Test\"\r\n                   }\r\n               ]\r\n           }\r\n       ]\r\n   }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{EndPointReloadVaucher}}",
+					"host": [
+						"{{URL}}{{EndPointReloadVaucher}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.environment.set('QC-Token', jsonData.access_token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "resource",
+							"value": "",
+							"type": "text"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PreAtuh",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "{{Ocp-Apim-Subscription-Key}}",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{QC-Token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"preauth\": {\r\n       \"channel\": \"AVCOM\",\r\n       \"reference-number\": \"TESTNIC\",\r\n       \"cards\": [\r\n           {\r\n               \"voucher\": \"{{VoucherNumber}}\", \r\n               \"pin\": \"{{VoucherPin}}\",\r\n               \"currency\": \"GBP\",\r\n               \"amount\": \"1432305\",\r\n               \"carrier\": \"AV\",\r\n               \"agent\": \"Avianca\",\r\n               \"office-id\": \"AirlineOffice1\",\r\n               \"beneficiaries\": [\r\n                   {\r\n                       \"first-name\": \"Test\",\r\n                       \"last-name\": \"Test\"\r\n                   }\r\n               ]\r\n           }\r\n       ]\r\n   }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{EndPointPreAtuh}}",
+					"host": [
+						"{{URL}}{{EndPointPreAtuh}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
