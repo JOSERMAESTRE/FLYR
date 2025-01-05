@@ -20,7 +20,7 @@ class PaymentPage(Base):
         self.Country_Locator = "country"
 
     def pay(self):
-        wait = WebDriverWait(self.driver, 10)
+        wait = WebDriverWait(self.driver, 30)
         cookie_button = wait.until(EC.visibility_of_element_located(
             (By.ID, "onetrust-accept-btn-handler")))
         cookie_button.click()

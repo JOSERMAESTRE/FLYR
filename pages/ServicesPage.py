@@ -16,7 +16,7 @@ class ServicesPage(Base):
             EC.title_is("avianca - Servicios")
         )
 
-        WebDriverWait(self.driver, 3).until(
+        WebDriverWait(self.driver, 10).until(
             EC.invisibility_of_element(
                 (By.CSS_SELECTOR, ".page-loader"))
         )

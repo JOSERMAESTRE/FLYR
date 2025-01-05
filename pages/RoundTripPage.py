@@ -33,7 +33,7 @@ class RoundTripPage(Base):
         date_picker = wait.until(EC.presence_of_element_located(
             (By.XPATH, "//div[@class='control_options ng-star-inserted']")))
         if date_picker.is_displayed():
-            self.click((By.XPATH, "//div[contains(@aria-label,'28-2-2025')]"))
+            self.click((By.XPATH, "//div[contains(@aria-label,'27-2-2025')]"))
         
         
         

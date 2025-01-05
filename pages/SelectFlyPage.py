@@ -31,7 +31,7 @@ class SelectflyPage(Base):
 
     def select_fly_Back(self):
 
-        wait = WebDriverWait(self.driver, 15)
+        wait = WebDriverWait(self.driver, 20)
         wait.until(
             EC.invisibility_of_element((By.CLASS_NAME, "page-loader"))
         )
@@ -41,13 +41,11 @@ class SelectflyPage(Base):
         )
 
         # Desplazar al elemento
-        self.driver.execute_script(
-            "arguments[0].scrollIntoView(true);", button)
+        self.driver.execute_script("arguments[0].click();", button)
 
         # Hacer clic en el botón
-        button.click()
         
-        buttons_fee = WebDriverWait(self.driver, 10).until(
+        buttons_fee = WebDriverWait(self.driver, 20).until(
         EC.presence_of_all_elements_located(self.fee_Locator)
         )
     

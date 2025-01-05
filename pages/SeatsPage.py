@@ -10,15 +10,17 @@ class SeatsPage(Base):
         super().__init__(driver)
         self.confirm_Locator = (
             By.XPATH, "//button[contains(@class, 'amount-summary_button') and contains(@class, 'amount-summary_button-action')]//span")
-
-    def chooseseats(self):
+        self.PlaneBack_locator = (By.ID,"424F477E5655507E383539347E41567E323032352D30322D32377E353335343332")
+        
+        
+    def chooseseats(self,seats):
         WebDriverWait(self.driver, 30).until(
             EC.title_is("avianca - Seleccionar asiento")
         )
 
         seat_button1 = WebDriverWait(self.driver, 20).until(
             EC.visibility_of_element_located(
-                (By.XPATH, "//span[contains(text(), '15A')]/ancestor::button"))
+                (By.XPATH, "//span[contains(text(), '"+seats[0]+"')]/ancestor::button"))
         )
         self.driver.execute_script("arguments[0].click();", seat_button1)
 
@@ -28,7 +30,7 @@ class SeatsPage(Base):
         )
         seat_button2 = WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(
-                (By.XPATH, "//span[contains(text(), '15B')]/ancestor::button"))
+                (By.XPATH, "//span[contains(text(), '"+seats[1]+"')]/ancestor::button"))
         )
         self.driver.execute_script("arguments[0].click();", seat_button2)
 
@@ -38,12 +40,52 @@ class SeatsPage(Base):
         )
         seat_button = WebDriverWait(self.driver, 5).until(
             EC.visibility_of_element_located(
-                (By.XPATH, "//span[contains(text(), '15C')]/ancestor::button"))
+                (By.XPATH, "//span[contains(text(), '"+seats[2]+"')]/ancestor::button"))
         )
         self.driver.execute_script("arguments[0].click();", seat_button)
-
         time.sleep(5)
+        
+        
+    def chooseseatsBack(self,seats):
+        
+        SecondPlane = WebDriverWait(self.driver, 30).until(
+            EC.presence_of_element_located(self.PlaneBack_locator)
+        )
+        self.driver.execute_script("arguments[0].click();", SecondPlane)
+        
+        
+        WebDriverWait(self.driver, 20).until(
+            EC.invisibility_of_element(
+                (By.CSS_SELECTOR, ".page-loader"))
+        )
+        
+        seat_button1 = WebDriverWait(self.driver, 5).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, "//span[contains(text(), '"+seats[0]+"')]/ancestor::button"))
+        )
+        self.driver.execute_script("arguments[0].click();", seat_button1)
 
+        WebDriverWait(self.driver, 10).until(
+            EC.invisibility_of_element(
+                (By.CSS_SELECTOR, ".page-loader"))
+        )
+        seat_button2 = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, "//span[contains(text(), '"+seats[1]+"')]/ancestor::button"))
+        )
+        self.driver.execute_script("arguments[0].click();", seat_button2)
+
+        WebDriverWait(self.driver, 10).until(
+            EC.invisibility_of_element(
+                (By.CSS_SELECTOR, ".page-loader"))
+        )
+        seat_button = WebDriverWait(self.driver, 5).until(
+            EC.visibility_of_element_located(
+                (By.XPATH, "//span[contains(text(), '"+seats[2]+"')]/ancestor::button"))
+        )
+        self.driver.execute_script("arguments[0].click();", seat_button)
+        time.sleep(7)
+        
     def Confirm(self):
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(self.confirm_Locator)

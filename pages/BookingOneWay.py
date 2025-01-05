@@ -53,7 +53,7 @@ class BookingOneWay(Base):
          date_picker = wait.until(EC.visibility_of_element_located(
             (By.XPATH, "//div[@class='control_options ng-star-inserted']")))
          if date_picker.is_displayed():
-            self.click((By.XPATH, "//div[contains(@aria-label,'31-1-2025')]"))
+            self.click((By.XPATH, "//div[contains(@aria-label,'28-1-2025')]"))
             
             
     def SelectPassengers(self,wait):

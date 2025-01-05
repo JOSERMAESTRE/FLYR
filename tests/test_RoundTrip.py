@@ -29,8 +29,8 @@ def setup_and_teardown():
     passengersPage = PassengersPage(driver)
     servicesPage = ServicesPage(driver)
     seatsPage = SeatsPage(driver)
-
-    yield roundTripPage, selectFlyPage,passengersPage, servicesPage, seatsPage
+    paymentPage = PaymentPage(driver)
+    yield roundTripPage, selectFlyPage,passengersPage, servicesPage, seatsPage,paymentPage
 
     # Cerrar el WebDriver después de la prueba
     driver.quit()
@@ -40,7 +40,7 @@ def setup_and_teardown():
 class TestRoundTrip:
 
     def test_round_trip(self, setup_and_teardown):
-        roundTripPage,selectFlyPage,passengersPage,servicesPage,seatsPage = setup_and_teardown
+        roundTripPage,selectFlyPage,passengersPage,servicesPage,seatsPage,paymentPage = setup_and_teardown
         data = ["Ida y vuelta"]
         roundTripPage.search_fly(data)
         selectFlyPage.select_fly()
@@ -66,8 +66,11 @@ class TestRoundTrip:
         passengersPage.Confirm()
         
         servicesPage.SelectServices()
-        seatsPage.chooseseats()
+        DataSeatsGo =["17D","17E","17C"]
+        seatsPage.chooseseats(DataSeatsGo)
+        DataSeatsBack =["30A","30C","30B"]
+        seatsPage.chooseseatsBack(DataSeatsBack)
+        seatsPage.Confirm()
+        paymentPage.pay()
         
-        
-        
-        time.sleep(200)
+     
