@@ -1,3 +1,4 @@
+import allure
 import pytest
 import sys
 import os
@@ -38,7 +39,8 @@ def setup_and_teardown():
 
 # Test para la reserva de un vuelo de ida
 
-
+@allure.feature("One Way Trip")
+@allure.title("Validación de One Way Trip")
 @pytest.mark.usefixtures("setup_and_teardown")
 class TestOneWay:
     def test_one(self, setup_and_teardown):

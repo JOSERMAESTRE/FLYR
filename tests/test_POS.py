@@ -1,3 +1,4 @@
+import allure
 import pytest
 import sys
 import os
@@ -27,7 +28,8 @@ def setup_and_teardown():
 
     driver.quit()
 
-
+@allure.feature("Slect POS")
+@allure.title("Validación de selección de POS")
 @pytest.mark.usefixtures("setup_and_teardown")
 class TestPOS:
     def test_POS(self, setup_and_teardown):

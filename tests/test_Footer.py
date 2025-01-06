@@ -1,3 +1,4 @@
+import allure
 import pytest
 import sys
 import os
@@ -30,7 +31,8 @@ def setup_and_teardown():
 
     driver.quit()
 
-
+@allure.feature("Testing Footers links")
+@allure.title("Validación de navegacion Footer")
 @pytest.mark.usefixtures("setup_and_teardown")
 class TestFooter:
     def test_Footer(self, setup_and_teardown):

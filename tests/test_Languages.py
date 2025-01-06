@@ -1,3 +1,4 @@
+import allure
 import pytest
 import sys
 import os
@@ -29,6 +30,9 @@ def setup_and_teardown():
     driver.quit()
 
 
+
+@allure.feature("Select Languages")
+@allure.title("Validación de selección de languages")
 @pytest.mark.usefixtures("setup_and_teardown")
 class TestLanguages:
     def test_Language(self, setup_and_teardown):

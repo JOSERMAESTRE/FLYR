@@ -1,3 +1,4 @@
+import allure
 import pytest
 import sys
 import os
@@ -30,6 +31,8 @@ def setup_and_teardown():
     driver.quit()
 
 
+@allure.feature("Testing Headers links")
+@allure.title("Validación de navegacion header")
 @pytest.mark.usefixtures("setup_and_teardown")
 class TestHeader:
     def test_Header(self, setup_and_teardown):
