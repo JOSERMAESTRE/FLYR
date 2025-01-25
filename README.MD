@@ -9,7 +9,7 @@ It is recommended to open the following project in: VScode
 - [ ] Reruns
 
 ## Create a virtual environment:
-Use this command to Create a virtual environment:
+Use this command to create a virtual environment:
 
 ```bash
 python -m venv venv
@@ -17,7 +17,7 @@ venv\Scripts\activate
 ```
 
 ## Install dependencies:
-Use this command to Install dependencies:
+Use this command to install dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -37,5 +37,5 @@ After running the tests, generate the report with the command:
 allure serve allure-results
 ```
 
-### recommendations:
+### Recommendations:
 Modify Seats: If the RoundWay or OneWay tests fail, adjust the seats as needed in the test files before rerunning the tests.
