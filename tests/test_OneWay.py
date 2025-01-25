@@ -17,7 +17,7 @@ from pages.BookingOneWay import BookingOneWay
 # Definir el fixture para configurar y cerrar el WebDriver
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="function")
 def setup_and_teardown():
     base = Base(None)
     driver = base.desktop_connection()
@@ -65,12 +65,12 @@ class TestOneWay:
         dataKid = ["Femenino", "Maria", "Gomez", "21", "4", "2017", "Colombia"]
         passengersPage.KidData(dataKid)
 
-        dataOwner = ["jose.rafan00@gmail.com", "Colombia", "3194560279"]
+        dataOwner = ["jose.n00@gmail.com", "Colombia", "3194560279"]
         passengersPage.OwnerData(dataOwner)
 
         passengersPage.Confirm()
         servicesPage.Confirm()
-        DataSeats = ["28A","28B","28C"]
+        DataSeats = ["16A","16B","16C"]
         seatsPage.chooseseats(DataSeats)
         seatsPage.Confirm()
         paymentPage.pay()

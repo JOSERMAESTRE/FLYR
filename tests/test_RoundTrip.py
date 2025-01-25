@@ -16,7 +16,7 @@ import time
 
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="function")
 def setup_and_teardown():
     base = Base(None)
     driver = base.desktop_connection()
@@ -67,9 +67,9 @@ class TestRoundTrip:
         passengersPage.Confirm()
         
         servicesPage.SelectServices()
-        DataSeatsGo =["24A","24B","24C"]
+        DataSeatsGo =["27A","27B","27C"]
         seatsPage.chooseseats(DataSeatsGo)
-        DataSeatsBack =["32A","32B","32C"]
+        DataSeatsBack =["21A","21B","21C"]
         seatsPage.chooseseatsBack(DataSeatsBack)
         seatsPage.Confirm()
         paymentPage.pay()

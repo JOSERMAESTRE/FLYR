@@ -9,7 +9,7 @@ from pages.Base import Base
 
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="function")
 def setup_and_teardown():
     base = Base(None)
     driver = base.desktop_connection()

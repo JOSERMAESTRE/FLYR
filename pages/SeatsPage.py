@@ -15,11 +15,11 @@ class SeatsPage(Base):
 
     def chooseseats(self, seats):
         try:
-            WebDriverWait(self.driver, 30).until(
+            WebDriverWait(self.driver, 20).until(
                 EC.title_is("avianca - Seleccionar asiento")
             )
             for seat in seats:
-                seat_button = WebDriverWait(self.driver, 20).until(
+                seat_button = WebDriverWait(self.driver, 10).until(
                     EC.visibility_of_element_located((By.XPATH, f"//span[contains(text(), '{seat}')]/ancestor::button")
                     )
                 )
@@ -32,7 +32,7 @@ class SeatsPage(Base):
 
     def chooseseatsBack(self, seats):
         try:
-            SecondPlane = WebDriverWait(self.driver, 30).until(
+            SecondPlane = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located(self.PlaneBack_locator)
             )
             self.driver.execute_script("arguments[0].click();", SecondPlane)
@@ -42,7 +42,7 @@ class SeatsPage(Base):
             )
 
             for seat in seats:
-                seat_button = WebDriverWait(self.driver, 20).until(
+                seat_button = WebDriverWait(self.driver, 10).until(
                     EC.visibility_of_element_located((By.XPATH, f"//span[contains(text(), '{seat}')]/ancestor::button")
                     )
                 )
