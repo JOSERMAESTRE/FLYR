@@ -70,7 +70,7 @@ class TestOneWay:
 
         passengersPage.Confirm()
         servicesPage.Confirm()
-        DataSeats = ["22A","22B","22C"]
+        DataSeats = ["28A","28B","28C"]
         seatsPage.chooseseats(DataSeats)
         seatsPage.Confirm()
         paymentPage.pay()
