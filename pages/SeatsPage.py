@@ -10,84 +10,66 @@ class SeatsPage(Base):
         super().__init__(driver)
         self.confirm_Locator = (
             By.XPATH, "//button[contains(@class, 'amount-summary_button') and contains(@class, 'amount-summary_button-action')]//span")
-        self.PlaneBack_locator = (By.ID,"424F477E5655507E383539347E41567E323032352D30322D32377E353335343332")
-        
-        
-    def chooseseats(self,seats):
-        WebDriverWait(self.driver, 30).until(
-            EC.title_is("avianca - Seleccionar asiento")
-        )
+        self.PlaneBack_locator = (
+            By.XPATH, "//button[starts-with(@id, '424F477')]")
 
-        seat_button1 = WebDriverWait(self.driver, 20).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//span[contains(text(), '"+seats[0]+"')]/ancestor::button"))
-        )
-        self.driver.execute_script("arguments[0].click();", seat_button1)
+    def chooseseats(self, seats):
+        try:
+            WebDriverWait(self.driver, 30).until(
+                EC.title_is("avianca - Seleccionar asiento")
+            )
+            for seat in seats:
+                seat_button = WebDriverWait(self.driver, 20).until(
+                    EC.visibility_of_element_located((By.XPATH, f"//span[contains(text(), '{seat}')]/ancestor::button")
+                    )
+                )
+                self.close_modal()
+                self.driver.execute_script("arguments[0].click();", seat_button)
+                WebDriverWait(self.driver, 10).until(EC.invisibility_of_element((By.CSS_SELECTOR, ".page-loader")))
+                self.close_modal()
+        except Exception as e:
+            print(f"Ocurrió un error al seleccionar los asientos: {e}")
 
-        WebDriverWait(self.driver, 10).until(
-            EC.invisibility_of_element(
-                (By.CSS_SELECTOR, ".page-loader"))
-        )
-        seat_button2 = WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//span[contains(text(), '"+seats[1]+"')]/ancestor::button"))
-        )
-        self.driver.execute_script("arguments[0].click();", seat_button2)
+    def chooseseatsBack(self, seats):
+        try:
+            SecondPlane = WebDriverWait(self.driver, 30).until(
+                EC.presence_of_element_located(self.PlaneBack_locator)
+            )
+            self.driver.execute_script("arguments[0].click();", SecondPlane)
+            
+            WebDriverWait(self.driver, 10).until(
+                EC.invisibility_of_element((By.CSS_SELECTOR, ".page-loader"))
+            )
 
-        WebDriverWait(self.driver, 10).until(
-            EC.invisibility_of_element(
-                (By.CSS_SELECTOR, ".page-loader"))
-        )
-        seat_button = WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//span[contains(text(), '"+seats[2]+"')]/ancestor::button"))
-        )
-        self.driver.execute_script("arguments[0].click();", seat_button)
-        time.sleep(5)
-        
-        
-    def chooseseatsBack(self,seats):
-        
-        SecondPlane = WebDriverWait(self.driver, 30).until(
-            EC.presence_of_element_located(self.PlaneBack_locator)
-        )
-        self.driver.execute_script("arguments[0].click();", SecondPlane)
-        
-        
-        WebDriverWait(self.driver, 20).until(
-            EC.invisibility_of_element(
-                (By.CSS_SELECTOR, ".page-loader"))
-        )
-        
-        seat_button1 = WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//span[contains(text(), '"+seats[0]+"')]/ancestor::button"))
-        )
-        self.driver.execute_script("arguments[0].click();", seat_button1)
+            for seat in seats:
+                seat_button = WebDriverWait(self.driver, 20).until(
+                    EC.visibility_of_element_located((By.XPATH, f"//span[contains(text(), '{seat}')]/ancestor::button")
+                    )
+                )
+                
+                self.close_modal()
+                self.driver.execute_script("arguments[0].click();", seat_button)
+                WebDriverWait(self.driver, 10).until(
+                    EC.invisibility_of_element((By.CSS_SELECTOR, ".page-loader"))
+                )
+                self.close_modal()
+        except Exception as e:
+            print(f"Ocurrió un error al seleccionar los asientos en el segundo avión: {e}")
 
-        WebDriverWait(self.driver, 10).until(
-            EC.invisibility_of_element(
-                (By.CSS_SELECTOR, ".page-loader"))
-        )
-        seat_button2 = WebDriverWait(self.driver, 10).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//span[contains(text(), '"+seats[1]+"')]/ancestor::button"))
-        )
-        self.driver.execute_script("arguments[0].click();", seat_button2)
 
-        WebDriverWait(self.driver, 10).until(
-            EC.invisibility_of_element(
-                (By.CSS_SELECTOR, ".page-loader"))
-        )
-        seat_button = WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located(
-                (By.XPATH, "//span[contains(text(), '"+seats[2]+"')]/ancestor::button"))
-        )
-        self.driver.execute_script("arguments[0].click();", seat_button)
-        time.sleep(7)
-        
     def Confirm(self):
         WebDriverWait(self.driver, 10).until(
             EC.element_to_be_clickable(self.confirm_Locator)
         )
         self.driver.find_element(*self.confirm_Locator).click()
+
+    def close_modal(self):
+        try:
+            modal = WebDriverWait(self.driver, 5).until(
+                EC.presence_of_element_located((By.CLASS_NAME, "modal-dialog"))
+            )
+            close_button = modal.find_element(By.XPATH, "//button[@data-dismiss='modal']")
+            close_button.click()
+            print("Modal cerrado exitosamente.")
+        except Exception as e:
+            print(f"No se pudo cerrar el modal: {e}")

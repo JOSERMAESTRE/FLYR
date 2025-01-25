@@ -67,9 +67,9 @@ class TestRoundTrip:
         passengersPage.Confirm()
         
         servicesPage.SelectServices()
-        DataSeatsGo =["28A","28B","28C"]
+        DataSeatsGo =["22A","22B","22C"]
         seatsPage.chooseseats(DataSeatsGo)
-        DataSeatsBack =["2A","13C","22B"]
+        DataSeatsBack =["31D","31E","31K"]
         seatsPage.chooseseatsBack(DataSeatsBack)
         seatsPage.Confirm()
         paymentPage.pay()

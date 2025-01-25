@@ -70,9 +70,9 @@ class TestOneWay:
 
         passengersPage.Confirm()
         servicesPage.Confirm()
-        DataSeats = ["24A","24B","24C"]
+        DataSeats = ["22A","22B","22C"]
         seatsPage.chooseseats(DataSeats)
         seatsPage.Confirm()
         paymentPage.pay()
-
-        assert comfirmationPage.Confirmation() == "¡Tu reserva está confirmada!"
+        assert comfirmationPage.Confirmation() == "¡Tu vuelo a Bogotá se encuentra en espera!"
+        

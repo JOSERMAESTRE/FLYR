@@ -23,7 +23,7 @@ class BookingOneWay(Base):
         wait = WebDriverWait(self.driver, 10)
         self.languaguesPage.SelectLanguages("Español")
         self.pOSpage.search_Pos("Colombia")
-        self.driver.implicitly_wait(20)
+        self.driver.implicitly_wait(10)
         if data[0] == "Ida":
             self.click(self.type_radio_locator)
 
